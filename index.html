@@ -32,6 +32,9 @@
         .rotate-y-180 { transform: rotateY(180deg); }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
         .flip-card:active .flip-card-inner, .flip-card:focus-within .flip-card-inner { transform: rotateY(180deg); }
+        /* Custom date picker icon style for webkit */
+        ::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: 0.2s; }
+        ::-webkit-calendar-picker-indicator:hover { opacity: 1; }
     </style>
 </head>
 <body class="font-sans text-gray-800 antialiased bg-gray-50">
@@ -344,8 +347,8 @@
                     <span class="lang-en hidden">Service Quoting Tool</span>
                 </h2>
                 <p class="text-brand-light">
-                    <span class="lang-es">Simule su presupuesto según la necesidad de su propiedad hoy mismo.</span>
-                    <span class="lang-en hidden">Simulate your budget based on your property's needs today.</span>
+                    <span class="lang-es">Simule su presupuesto según la necesidad y fechas de su propiedad.</span>
+                    <span class="lang-en hidden">Simulate your budget based on your property's needs and dates.</span>
                 </p>
             </div>
 
@@ -354,36 +357,60 @@
                     <span class="lang-es">MEJOR VALOR</span><span class="lang-en hidden">BEST VALUE</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Controles Interactivos -->
                     <div>
-                        <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
-                            <span class="lang-es">Seleccione las horas requeridas:</span>
-                            <span class="lang-en hidden">Select required hours:</span>
-                        </label>
-                        
-                        <div class="flex items-center justify-between bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-6">
-                            <button id="btn-minus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <div class="text-2xl font-bold text-brand-dark" id="hours-display-text">3 hrs</div>
-                            <button id="btn-plus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
+                        <!-- Selección de Horas -->
+                        <div class="mb-8">
+                            <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
+                                <span class="lang-es">1. Seleccione las horas:</span>
+                                <span class="lang-en hidden">1. Select hours:</span>
+                            </label>
+                            
+                            <div class="flex items-center justify-between bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-6">
+                                <button id="btn-minus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <div class="text-2xl font-bold text-brand-dark" id="hours-display-text">3 hrs</div>
+                                <button id="btn-plus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                            
+                            <input type="range" id="hour-slider" min="1" max="8" value="3" class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand mb-2">
+                            <div class="flex justify-between text-xs text-gray-400 font-medium">
+                                <span>1h</span><span>2h</span><span>3h</span><span>4h</span><span>5h</span><span>6h</span><span></span><span>8h (Día/Day)</span>
+                            </div>
                         </div>
-                        
-                        <input type="range" id="hour-slider" min="1" max="8" value="3" class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand mb-2">
-                        <div class="flex justify-between text-xs text-gray-400 font-medium">
-                            <span>1h</span><span>2h</span><span>3h</span><span>4h</span><span>5h</span><span>6h</span><span></span><span>8h (Día/Day)</span>
+
+                        <!-- Selección de Fechas -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
+                                <span class="lang-es">2. Añada sus fechas de limpieza:</span>
+                                <span class="lang-en hidden">2. Add your cleaning dates:</span>
+                            </label>
+                            <div class="flex gap-2 mb-4">
+                                <input type="date" id="date-picker" class="flex-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand font-medium">
+                                <button id="btn-add-date" class="bg-brand text-white px-5 py-3 rounded-xl font-bold hover:bg-brand-dark transition shadow-md flex items-center justify-center">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- Contenedor de etiquetas de fechas -->
+                            <div id="dates-list" class="flex flex-wrap gap-2">
+                                <!-- Las fechas se inyectan aquí -->
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Panel de Total -->
                     <div class="bg-brand-light/30 rounded-2xl p-6 text-center h-full flex flex-col justify-center border border-brand-light">
                         <p class="text-sm text-gray-500 uppercase tracking-wide font-bold mb-2">
                             <span class="lang-es">Total Estimado</span><span class="lang-en hidden">Estimated Total</span>
                         </p>
-                        <div class="text-5xl md:text-6xl font-extrabold text-brand-dark mb-4 transition-all duration-300" id="price-display">₡9,000</div>
+                        <div class="text-5xl md:text-6xl font-extrabold text-brand-dark mb-2 transition-all duration-300" id="price-display">₡9,000</div>
+                        <p class="text-gray-500 font-medium text-sm mb-4" id="multiplier-display"></p>
                         
-                        <p class="text-brand font-medium h-6 text-sm mb-6" id="discount-badge"></p>
+                        <p class="text-brand font-bold h-6 text-sm mb-6" id="discount-badge"></p>
 
                         <a href="#" id="calc-whatsapp" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-xl font-bold text-lg transition-transform hover:scale-[1.02] shadow-lg shadow-green-500/30">
                             <i class="fa-brands fa-whatsapp mr-2 text-xl"></i>
@@ -443,7 +470,7 @@
         </div>
     </section>
 
-   <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 text-center">
         <div class="max-w-4xl mx-auto px-4">
             <div class="w-16 h-1 bg-brand mx-auto mb-6 rounded"></div>
@@ -451,18 +478,38 @@
                 <span class="lang-es">La tranquilidad de un espacio impecable</span>
                 <span class="lang-en hidden">The peace of mind of a spotless space</span>
             </h4>
-            <!-- Aquí está el cambio a "La Fortuna y la GAM" -->
             <p class="text-sm text-gray-400 mb-2">© 2026 Sofía Limpieza y Hospitalidad. La Fortuna y la GAM, Costa Rica.</p>
             <p class="text-xs text-gray-500">Diseñado con <i class="fa-solid fa-heart text-red-500"></i> para un mejor servicio.</p>
         </div>
     </footer>
 
     <script>
+        // ESTADO GLOBAL
         let isEnglish = false;
+        let selectedDates = [];
+        const phone = "50671585300";
+
+        // ELEMENTOS DEL DOM
         const btnLang = document.getElementById('langToggle');
         const lblEs = document.getElementById('label-es');
         const lblEn = document.getElementById('label-en');
         
+        const slider = document.getElementById('hour-slider');
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
+        const hoursDisplayText = document.getElementById('hours-display-text');
+        
+        const datePicker = document.getElementById('date-picker');
+        const btnAddDate = document.getElementById('btn-add-date');
+        const datesList = document.getElementById('dates-list');
+        
+        const priceDisplay = document.getElementById('price-display');
+        const multiplierDisplay = document.getElementById('multiplier-display');
+        const badge = document.getElementById('discount-badge');
+        const btnWa = document.getElementById('calc-whatsapp');
+        const ribbon = document.getElementById('ribbon');
+
+        // LÓGICA DE IDIOMA
         btnLang.addEventListener('click', () => {
             isEnglish = !isEnglish;
             if(isEnglish) {
@@ -480,62 +527,121 @@
             const enElements = document.querySelectorAll('.lang-en');
             esElements.forEach(el => { isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'); });
             enElements.forEach(el => { isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'); });
+            
+            renderDates(); // Re-renderizar fechas para cambiar el formato de mes
             updateCalculator(); 
         });
 
-        const slider = document.getElementById('hour-slider');
-        const priceDisplay = document.getElementById('price-display');
-        const hoursDisplayText = document.getElementById('hours-display-text');
-        const badge = document.getElementById('discount-badge');
-        const btnWa = document.getElementById('calc-whatsapp');
-        const ribbon = document.getElementById('ribbon');
-        const btnMinus = document.getElementById('btn-minus');
-        const btnPlus = document.getElementById('btn-plus');
-        const phone = "50671585300";
+        // LÓGICA DE FECHAS
+        btnAddDate.addEventListener('click', () => {
+            const dateVal = datePicker.value;
+            if (dateVal && !selectedDates.includes(dateVal)) {
+                selectedDates.push(dateVal);
+                selectedDates.sort(); // Ordenar cronológicamente
+                renderDates();
+                updateCalculator();
+            }
+            datePicker.value = ''; // Limpiar input
+        });
 
+        function renderDates() {
+            datesList.innerHTML = '';
+            selectedDates.forEach(date => {
+                const chip = document.createElement('div');
+                chip.className = 'bg-brand-light text-brand-dark px-3 py-1.5 rounded-lg text-sm font-bold flex items-center shadow-sm border border-brand/20';
+                
+                // Formatear fecha (Ej: 15 Oct)
+                const d = new Date(date + 'T12:00:00'); 
+                const formatted = d.toLocaleDateString(isEnglish ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
+
+                chip.innerHTML = `
+                    <i class="fa-regular fa-calendar mr-2 opacity-70"></i> ${formatted}
+                    <button class="ml-3 text-brand hover:text-red-500 focus:outline-none transition" onclick="removeDate('${date}')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+                datesList.appendChild(chip);
+            });
+        }
+
+        window.removeDate = function(dateToRemove) {
+            selectedDates = selectedDates.filter(d => d !== dateToRemove);
+            renderDates();
+            updateCalculator();
+        };
+
+        // LÓGICA DEL CALCULADOR
         function updateCalculator() {
             let val = parseInt(slider.value);
+            // Salto de 6 a 8
             if (val === 7) {
                 if (parseInt(slider.dataset.lastValue || 3) > val) val = 6;
                 else val = 8;
                 slider.value = val;
             }
             slider.dataset.lastValue = val;
-            let price = 0;
+            
+            let basePrice = 0;
             let msg = "";
-
+            let numDays = Math.max(1, selectedDates.length); // Mínimo 1 para mostrar el precio base
+            
+            // Textos de Horas
             if (val <= 6) {
-                price = val * 3000;
+                basePrice = val * 3000;
                 hoursDisplayText.innerHTML = `${val} ${isEnglish ? 'hrs' : 'hrs'}`;
                 badge.innerHTML = "";
                 ribbon.classList.add('hidden');
-                msg = isEnglish ? 
-                    `Hello Sofía! I'm interested in booking a cleaning service for ${val} hours (₡${price.toLocaleString()}).` : 
-                    `¡Hola doña Sofía! Deseo agendar un servicio de limpieza por ${val} horas (₡${price.toLocaleString()}).`;
             } else {
                 val = 8;
                 slider.value = 8;
-                price = 20000;
+                basePrice = 20000;
                 hoursDisplayText.innerHTML = isEnglish ? 'Full Day' : 'Día Completo';
                 badge.innerHTML = isEnglish ? '<i class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Special Package' : '<i class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Paquete Especial';
                 ribbon.classList.remove('hidden');
-                msg = isEnglish ? 
-                    `Hello Sofía! I want to book the Full Day service for 8 hours (₡20,000).` : 
-                    `¡Hola doña Sofía! Me interesa agendar el servicio de Día Completo (8 hrs por ₡20.000).`;
             }
+
+            // Calculo Final
+            let totalPrice = basePrice * numDays;
+            
+            // Texto Multiplicador debajo del precio
+            if (selectedDates.length > 1) {
+                multiplierDisplay.innerHTML = isEnglish ? `(For ${selectedDates.length} selected days)` : `(Por ${selectedDates.length} días seleccionados)`;
+            } else {
+                multiplierDisplay.innerHTML = "";
+            }
+
+            // String de fechas para el mensaje
+            let dateString = selectedDates.length > 0 ? selectedDates.join(', ') : (isEnglish ? 'Not specified yet' : 'Por definir');
+
+            // Armar mensaje WhatsApp
+            if (val <= 6) {
+                msg = isEnglish ? 
+                    `Hello Sofía! I want to book a cleaning service for ${val} hours.\n🗓 Dates: ${dateString}\n💰 Estimated total: ₡${totalPrice.toLocaleString()}.` : 
+                    `¡Hola doña Sofía! Deseo agendar un servicio de limpieza por ${val} horas.\n🗓 Fechas: ${dateString}\n💰 Total estimado: ₡${totalPrice.toLocaleString()}.`;
+            } else {
+                msg = isEnglish ? 
+                    `Hello Sofía! I want to book the Full Day service (8 hrs).\n🗓 Dates: ${dateString}\n💰 Estimated total: ₡${totalPrice.toLocaleString()}.` : 
+                    `¡Hola doña Sofía! Me interesa agendar el servicio de Día Completo (8 hrs).\n🗓 Fechas: ${dateString}\n💰 Total estimado: ₡${totalPrice.toLocaleString()}.`;
+            }
+
+            // Animación
             priceDisplay.style.opacity = 0;
             setTimeout(() => {
-                priceDisplay.innerHTML = `₡${price.toLocaleString()}`;
+                priceDisplay.innerHTML = `₡${totalPrice.toLocaleString()}`;
                 priceDisplay.style.opacity = 1;
             }, 150);
+            
             btnWa.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
         }
 
         slider.addEventListener('input', updateCalculator);
         btnMinus.addEventListener('click', () => { if(slider.value > 1) { slider.value = parseInt(slider.value) - 1; updateCalculator(); } });
         btnPlus.addEventListener('click', () => { if(slider.value < 8) { slider.value = parseInt(slider.value) + 1; updateCalculator(); } });
+        
+        // Inicializar
         updateCalculator(); 
 
+        // LÓGICA FAQ
         const faqToggles = document.querySelectorAll('.faq-toggle');
         faqToggles.forEach(toggle => {
             toggle.addEventListener('click', () => {
@@ -548,6 +654,7 @@
             });
         });
 
+        // ANIMACIONES SCROLL
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
