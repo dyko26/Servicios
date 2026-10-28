@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sofía | Limpieza y Hospitalidad</title>
+    <title>Sofía | Limpieza y Hospitalidad en La Fortuna y la GAM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -22,15 +22,10 @@
         }
     </script>
     <style>
-        /* Animaciones de Scroll */
         .scroll-hide { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .scroll-show { opacity: 1; transform: translateY(0); }
-        
-        /* FAQ Acordeón */
         .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; }
         .faq-content.open { max-height: 200px; padding-top: 1rem; padding-bottom: 1rem; }
-        
-        /* Flashcards 3D (Beneficios) */
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
@@ -48,7 +43,6 @@
                 <a href="#" class="text-2xl font-bold text-brand-dark">Sofía<span class="text-brand">Servicios</span></a>
                 
                 <div class="flex items-center space-x-4 md:space-x-8">
-                    <!-- Menú Desktop -->
                     <div class="hidden md:flex space-x-6 items-center">
                         <a href="#beneficios" class="text-gray-600 hover:text-brand transition font-medium">
                             <span class="lang-es">Beneficios</span><span class="lang-en hidden">Benefits</span>
@@ -64,13 +58,11 @@
                         </a>
                     </div>
                     
-                    <!-- Language Toggle Switch -->
                     <div class="flex items-center bg-gray-100 rounded-full p-1 cursor-pointer border border-gray-300 shadow-inner" id="langToggle" title="Cambiar idioma / Change language">
                         <span id="label-es" class="text-xs font-bold px-2 py-1 bg-white text-gray-800 rounded-full shadow-sm transition-all duration-300">ES</span>
                         <span id="label-en" class="text-xs font-bold px-2 py-1 text-gray-500 rounded-full transition-all duration-300">EN</span>
                     </div>
 
-                    <!-- Contacto -->
                     <a href="#calculadora" class="hidden md:inline-block bg-brand hover:bg-brand-dark text-white px-5 py-2 rounded-full font-medium transition shadow-lg">
                         <span class="lang-es">Agendar</span><span class="lang-en hidden">Book Now</span>
                     </a>
@@ -92,8 +84,8 @@
                     <span class="lang-en hidden">Spotless cleaning, <br><span class="text-brand">heartfelt hospitality</span></span>
                 </h1>
                 <p class="text-lg text-gray-600 mb-8">
-                    <span class="lang-es">Servicios profesionales para Airbnbs y residencias en La Fortuna. Logre reseñas de 5 estrellas sin preocuparse por la logística.</span>
-                    <span class="lang-en hidden">Professional services for Airbnbs and homes in La Fortuna. Get 5-star reviews without worrying about logistics.</span>
+                    <span class="lang-es">Servicios profesionales para Airbnbs y residencias en La Fortuna y la GAM. Logre reseñas de 5 estrellas sin preocuparse por la logística.</span>
+                    <span class="lang-en hidden">Professional services for Airbnbs and homes in La Fortuna and the GAM. Get 5-star reviews without worrying about logistics.</span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#calculadora" class="bg-brand hover:bg-brand-dark text-white px-8 py-3 rounded-full text-lg font-semibold transition shadow-xl text-center transform hover:scale-105">
@@ -102,7 +94,6 @@
                     </a>
                 </div>
             </div>
-            <!-- Imagen Hero -->
             <div class="md:w-1/2 flex justify-center w-full scroll-hide" style="transition-delay: 200ms;">
                 <div class="w-full max-w-lg h-[24rem] bg-white rounded-3xl shadow-2xl flex items-center justify-center border-4 border-white overflow-hidden relative group">
                     <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Clean room" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -111,7 +102,7 @@
         </div>
     </section>
 
-    <!-- BENEFICIOS: Tarjetas Flashcards Interactivas -->
+    <!-- Beneficios -->
     <section id="beneficios" class="py-20 px-4 bg-white">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 scroll-hide">
@@ -124,7 +115,6 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Flashcard 1 -->
                 <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
@@ -149,7 +139,6 @@
                     </div>
                 </div>
 
-                <!-- Flashcard 2 -->
                 <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 150ms;">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
@@ -174,7 +163,6 @@
                     </div>
                 </div>
 
-                <!-- Flashcard 3 -->
                 <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 300ms;">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
@@ -182,7 +170,7 @@
                                 <i class="fa-solid fa-shield-heart text-3xl text-purple-600"></i>
                             </div>
                             <h3 class="text-xl font-bold text-gray-800">
-                                <span class="lang-es">Honradez y Confianza</span><span class="lang-en hidden">Honesty & Trust</span>
+                                <span class="lang-es">Amplia Cobertura</span><span class="lang-en hidden">Wide Coverage</span>
                             </h3>
                             <p class="text-purple-600 font-medium text-sm mt-2">
                                 <span class="lang-es">Girar para ver <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
@@ -190,10 +178,10 @@
                             </p>
                         </div>
                         <div class="absolute w-full h-full backface-hidden bg-purple-600 text-white rotate-y-180 flex flex-col items-center justify-center p-6 rounded-2xl text-center">
-                            <i class="fa-solid fa-handshake-angle text-purple-200 text-3xl mb-3"></i>
+                            <i class="fa-solid fa-map-location-dot text-purple-200 text-3xl mb-3"></i>
                             <p class="font-medium leading-relaxed">
-                                <span class="lang-es">Una profesional local que cuida de su inversión como si fuera propia. Referencias comprobables a solicitud.</span>
-                                <span class="lang-en hidden">A local professional who cares for your investment as her own. Verifiable references available upon request.</span>
+                                <span class="lang-es">Operamos en La Fortuna de San Carlos y la Gran Área Metropolitana (GAM). Referencias comprobables a solicitud.</span>
+                                <span class="lang-en hidden">Operating in La Fortuna and the Greater Metropolitan Area (GAM). Verifiable references available upon request.</span>
                             </p>
                         </div>
                     </div>
@@ -211,7 +199,6 @@
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
                 <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 100ms;">
                     <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
                         <i class="fa-solid fa-bed"></i>
@@ -226,7 +213,6 @@
                     </p>
                 </div>
                 
-                <!-- Card 2 -->
                 <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 200ms;">
                     <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
                         <i class="fa-solid fa-house-chimney"></i>
@@ -241,7 +227,6 @@
                     </p>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 300ms;">
                     <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
                         <i class="fa-solid fa-utensils"></i>
@@ -259,7 +244,7 @@
         </div>
     </section>
 
-    <!-- INSUMOS Y HERRAMIENTAS (NUEVA SECCIÓN) -->
+    <!-- Insumos y Herramientas -->
     <section id="insumos" class="py-20 px-4 bg-white border-t border-gray-100">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12 scroll-hide">
@@ -274,7 +259,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Lo que Sofía lleva -->
                 <div class="bg-brand-light/20 border border-brand-light rounded-2xl p-8 shadow-sm scroll-hide">
                     <h3 class="text-xl font-bold text-brand-dark mb-6 flex items-center">
                         <div class="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center mr-3">
@@ -315,7 +299,6 @@
                     </ul>
                 </div>
 
-                <!-- Lo que debe poner el dueño -->
                 <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm scroll-hide" style="transition-delay: 150ms;">
                     <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
                         <div class="w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center mr-3">
@@ -367,13 +350,11 @@
             </div>
 
             <div class="bg-white text-gray-800 border border-gray-200 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-                <!-- Ribbon Mejor Valor -->
                 <div id="ribbon" class="absolute top-6 -right-12 bg-yellow-400 text-yellow-900 font-bold px-12 py-1 transform rotate-45 hidden text-sm shadow-md">
                     <span class="lang-es">MEJOR VALOR</span><span class="lang-en hidden">BEST VALUE</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                    <!-- Controles Interactivos -->
                     <div>
                         <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
                             <span class="lang-es">Seleccione las horas requeridas:</span>
@@ -396,7 +377,6 @@
                         </div>
                     </div>
 
-                    <!-- Panel de Total -->
                     <div class="bg-brand-light/30 rounded-2xl p-6 text-center h-full flex flex-col justify-center border border-brand-light">
                         <p class="text-sm text-gray-500 uppercase tracking-wide font-bold mb-2">
                             <span class="lang-es">Total Estimado</span><span class="lang-en hidden">Estimated Total</span>
@@ -415,7 +395,7 @@
         </div>
     </section>
 
-    <!-- FAQ Acordeón (Actualizado) -->
+    <!-- FAQ Acordeón -->
     <section id="faq" class="py-20 px-4 bg-white">
         <div class="max-w-3xl mx-auto scroll-hide">
             <h2 class="text-3xl font-bold text-center mb-10">
@@ -424,7 +404,6 @@
             </h2>
             
             <div class="space-y-4">
-                <!-- Pregunta 1 ACTUALIZADA -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
                         <span class="lang-es">¿Quién provee los artículos de limpieza?</span>
@@ -437,7 +416,6 @@
                     </div>
                 </div>
 
-                <!-- Pregunta 2 -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
                         <span class="lang-es">¿Se trabajan fines de semana o feriados?</span>
@@ -445,12 +423,11 @@
                         <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300"></i>
                     </button>
                     <div class="faq-content px-6 text-gray-600 text-sm bg-gray-50 border-t border-gray-100">
-                        <span class="lang-es">Total disponibilidad (sujeto a agenda previa). Entendemos que el turismo en La Fortuna nunca se detiene.</span>
-                        <span class="lang-en hidden">Full availability (subject to prior scheduling). We understand tourism in La Fortuna never stops.</span>
+                        <span class="lang-es">Total disponibilidad (sujeto a agenda previa). Entendemos que el movimiento en La Fortuna y la GAM nunca se detiene.</span>
+                        <span class="lang-en hidden">Full availability (subject to prior scheduling). We understand movement in La Fortuna and the GAM never stops.</span>
                     </div>
                 </div>
 
-                <!-- Pregunta 3 -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
                         <span class="lang-es">¿Qué zonas abarcan los servicios?</span>
@@ -458,8 +435,8 @@
                         <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300"></i>
                     </button>
                     <div class="faq-content px-6 text-gray-600 text-sm bg-gray-50 border-t border-gray-100">
-                        <span class="lang-es">Principalmente el centro de La Fortuna y zonas turísticas aledañas de rápido acceso.</span>
-                        <span class="lang-en hidden">Mainly downtown La Fortuna and easily accessible surrounding tourist areas.</span>
+                        <span class="lang-es">Cubrimos estratégicamente La Fortuna de San Carlos y la Gran Área Metropolitana (GAM).</span>
+                        <span class="lang-en hidden">We strategically cover La Fortuna and the Greater Metropolitan Area (GAM).</span>
                     </div>
                 </div>
             </div>
@@ -474,14 +451,12 @@
                 <span class="lang-es">La tranquilidad de un espacio impecable</span>
                 <span class="lang-en hidden">The peace of mind of a spotless space</span>
             </h4>
-            <p class="text-sm text-gray-400 mb-2">© 2026 Sofía Limpieza y Hospitalidad. La Fortuna, Costa Rica.</p>
+            <p class="text-sm text-gray-400 mb-2">© 2026 Sofía Limpieza y Hospitalidad. La Fortuna y la GAM, Costa Rica.</p>
             <p class="text-xs text-gray-500">Diseñado con <i class="fa-solid fa-heart text-red-500"></i> para un mejor servicio.</p>
         </div>
     </footer>
 
-    <!-- Lógica JavaScript Interactivas -->
     <script>
-        // 1. Lógica Toggle Bilingüe Mejorada
         let isEnglish = false;
         const btnLang = document.getElementById('langToggle');
         const lblEs = document.getElementById('label-es');
@@ -489,8 +464,6 @@
         
         btnLang.addEventListener('click', () => {
             isEnglish = !isEnglish;
-            
-            // Animación del Switch
             if(isEnglish) {
                 lblEn.classList.replace('text-gray-500', 'text-gray-800');
                 lblEn.classList.add('bg-white', 'shadow-sm');
@@ -502,17 +475,13 @@
                 lblEn.classList.replace('text-gray-800', 'text-gray-500');
                 lblEn.classList.remove('bg-white', 'shadow-sm');
             }
-            
             const esElements = document.querySelectorAll('.lang-es');
             const enElements = document.querySelectorAll('.lang-en');
-            
             esElements.forEach(el => { isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'); });
             enElements.forEach(el => { isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'); });
-            
             updateCalculator(); 
         });
 
-        // 2. Cotizador Interactivo Avanzado
         const slider = document.getElementById('hour-slider');
         const priceDisplay = document.getElementById('price-display');
         const hoursDisplayText = document.getElementById('hours-display-text');
@@ -525,14 +494,12 @@
 
         function updateCalculator() {
             let val = parseInt(slider.value);
-            // Evitar valor 7, saltar de 6 a 8
             if (val === 7) {
                 if (parseInt(slider.dataset.lastValue || 3) > val) val = 6;
                 else val = 8;
                 slider.value = val;
             }
             slider.dataset.lastValue = val;
-
             let price = 0;
             let msg = "";
 
@@ -555,54 +522,31 @@
                     `Hello Sofía! I want to book the Full Day service for 8 hours (₡20,000).` : 
                     `¡Hola doña Sofía! Me interesa agendar el servicio de Día Completo (8 hrs por ₡20.000).`;
             }
-
-            // Animación de precio
             priceDisplay.style.opacity = 0;
             setTimeout(() => {
                 priceDisplay.innerHTML = `₡${price.toLocaleString()}`;
                 priceDisplay.style.opacity = 1;
             }, 150);
-
             btnWa.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
         }
 
         slider.addEventListener('input', updateCalculator);
-        
-        btnMinus.addEventListener('click', () => {
-            if(slider.value > 1) {
-                slider.value = parseInt(slider.value) - 1;
-                updateCalculator();
-            }
-        });
-        btnPlus.addEventListener('click', () => {
-            if(slider.value < 8) {
-                slider.value = parseInt(slider.value) + 1;
-                updateCalculator();
-            }
-        });
+        btnMinus.addEventListener('click', () => { if(slider.value > 1) { slider.value = parseInt(slider.value) - 1; updateCalculator(); } });
+        btnPlus.addEventListener('click', () => { if(slider.value < 8) { slider.value = parseInt(slider.value) + 1; updateCalculator(); } });
+        updateCalculator(); 
 
-        updateCalculator(); // Init
-
-        // 3. FAQ Acordeón
         const faqToggles = document.querySelectorAll('.faq-toggle');
         faqToggles.forEach(toggle => {
             toggle.addEventListener('click', () => {
                 const content = toggle.nextElementSibling;
                 const icon = toggle.querySelector('i');
-                
-                document.querySelectorAll('.faq-content').forEach(c => {
-                    if (c !== content) c.classList.remove('open');
-                });
-                document.querySelectorAll('.faq-toggle i').forEach(i => {
-                    if (i !== icon) i.style.transform = "rotate(0deg)";
-                });
-
+                document.querySelectorAll('.faq-content').forEach(c => { if (c !== content) c.classList.remove('open'); });
+                document.querySelectorAll('.faq-toggle i').forEach(i => { if (i !== icon) i.style.transform = "rotate(0deg)"; });
                 content.classList.toggle('open');
                 icon.style.transform = content.classList.contains('open') ? "rotate(180deg)" : "rotate(0deg)";
             });
         });
 
-        // 4. Scroll Animations (Intersection Observer)
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -613,7 +557,6 @@
             });
         }, observerOptions);
         document.querySelectorAll('.scroll-hide').forEach(el => observer.observe(el));
-
     </script>
 </body>
 </html>
