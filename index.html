@@ -2,7 +2,7 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sofía | Limpieza y Hospitalidad en La Fortuna y la GAM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -32,73 +32,103 @@
         .rotate-y-180 { transform: rotateY(180deg); }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
         .flip-card:active .flip-card-inner, .flip-card:focus-within .flip-card-inner { transform: rotateY(180deg); }
-        /* Custom date picker icon style for webkit */
-        ::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: 0.2s; }
+        ::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: 0.2s; padding: 5px; }
         ::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+        /* Mobile Menu Transitions */
+        #mobile-menu { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+        #mobile-menu.menu-open { max-height: 400px; opacity: 1; }
     </style>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-gray-50">
+<body class="font-sans text-gray-800 antialiased bg-gray-50 overflow-x-hidden">
 
     <!-- Navbar -->
     <nav class="fixed w-full bg-white shadow-md z-50 transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
             <div class="flex justify-between items-center h-16">
-                <a href="#" class="text-2xl font-bold text-brand-dark">Sofía<span class="text-brand">Servicios</span></a>
+                <!-- Logo -->
+                <a href="#" class="text-xl md:text-2xl font-bold text-brand-dark z-50">Sofía<span class="text-brand">Servicios</span></a>
                 
-                <div class="flex items-center space-x-4 md:space-x-8">
+                <div class="flex items-center space-x-3 md:space-x-8">
+                    <!-- Menú Desktop -->
                     <div class="hidden md:flex space-x-6 items-center">
-                        <a href="#beneficios" class="text-gray-600 hover:text-brand transition font-medium">
+                        <a href="#beneficios" class="text-gray-600 hover:text-brand transition font-medium text-sm lg:text-base">
                             <span class="lang-es">Beneficios</span><span class="lang-en hidden">Benefits</span>
                         </a>
-                        <a href="#servicios" class="text-gray-600 hover:text-brand transition font-medium">
+                        <a href="#servicios" class="text-gray-600 hover:text-brand transition font-medium text-sm lg:text-base">
                             <span class="lang-es">Servicios</span><span class="lang-en hidden">Services</span>
                         </a>
-                        <a href="#insumos" class="text-gray-600 hover:text-brand transition font-medium">
+                        <a href="#insumos" class="text-gray-600 hover:text-brand transition font-medium text-sm lg:text-base">
                             <span class="lang-es">Kit</span><span class="lang-en hidden">Kit</span>
                         </a>
-                        <a href="#calculadora" class="text-gray-600 hover:text-brand transition font-medium">
+                        <a href="#calculadora" class="text-gray-600 hover:text-brand transition font-medium text-sm lg:text-base">
                             <span class="lang-es">Cotizador</span><span class="lang-en hidden">Quote</span>
                         </a>
                     </div>
                     
-                    <div class="flex items-center bg-gray-100 rounded-full p-1 cursor-pointer border border-gray-300 shadow-inner" id="langToggle" title="Cambiar idioma / Change language">
-                        <span id="label-es" class="text-xs font-bold px-2 py-1 bg-white text-gray-800 rounded-full shadow-sm transition-all duration-300">ES</span>
-                        <span id="label-en" class="text-xs font-bold px-2 py-1 text-gray-500 rounded-full transition-all duration-300">EN</span>
+                    <!-- Language Toggle Switch (Visible en Móvil y Desktop) -->
+                    <div class="flex items-center bg-gray-100 rounded-full p-1 cursor-pointer border border-gray-300 shadow-inner z-50" id="langToggle" title="Cambiar idioma / Change language">
+                        <span id="label-es" class="text-xs font-bold px-2 md:px-3 py-1 bg-white text-gray-800 rounded-full shadow-sm transition-all duration-300">ES</span>
+                        <span id="label-en" class="text-xs font-bold px-2 md:px-3 py-1 text-gray-500 rounded-full transition-all duration-300">EN</span>
                     </div>
 
-                    <a href="#calculadora" class="hidden md:inline-block bg-brand hover:bg-brand-dark text-white px-5 py-2 rounded-full font-medium transition shadow-lg">
+                    <!-- Botón Agendar Desktop -->
+                    <a href="#calculadora" class="hidden md:inline-block bg-brand hover:bg-brand-dark text-white px-5 py-2 rounded-full font-medium transition shadow-lg text-sm lg:text-base">
                         <span class="lang-es">Agendar</span><span class="lang-en hidden">Book Now</span>
                     </a>
+
+                    <!-- Hamburger Button (Mobile) -->
+                    <button id="hamburger-btn" class="md:hidden text-gray-700 focus:outline-none p-2 z-50">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="md:hidden bg-white w-full border-t border-gray-100 absolute top-16 left-0 shadow-xl flex flex-col px-6 py-2">
+            <a href="#beneficios" class="mobile-link py-3 border-b border-gray-50 text-gray-700 font-medium">
+                <span class="lang-es">Beneficios</span><span class="lang-en hidden">Benefits</span>
+            </a>
+            <a href="#servicios" class="mobile-link py-3 border-b border-gray-50 text-gray-700 font-medium">
+                <span class="lang-es">Servicios</span><span class="lang-en hidden">Services</span>
+            </a>
+            <a href="#insumos" class="mobile-link py-3 border-b border-gray-50 text-gray-700 font-medium">
+                <span class="lang-es">Kit de Limpieza</span><span class="lang-en hidden">Cleaning Kit</span>
+            </a>
+            <a href="#calculadora" class="mobile-link py-3 border-b border-gray-50 text-gray-700 font-medium">
+                <span class="lang-es">Cotizador</span><span class="lang-en hidden">Quote</span>
+            </a>
+            <a href="#faq" class="mobile-link py-3 text-gray-700 font-medium">
+                <span class="lang-es">Preguntas Frecuentes</span><span class="lang-en hidden">FAQ</span>
+            </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 bg-brand-light overflow-hidden">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center text-center md:text-left gap-10">
-            <div class="md:w-1/2 scroll-hide">
-                <div class="inline-block bg-white text-brand-dark font-semibold px-4 py-1 rounded-full text-sm mb-4 shadow-sm border border-brand/20">
+    <section class="pt-28 pb-16 md:pt-32 md:pb-20 px-4 bg-brand-light overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center text-center md:text-left gap-8 md:gap-10">
+            <div class="md:w-1/2 scroll-hide w-full">
+                <div class="inline-block bg-white text-brand-dark font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm mb-4 md:mb-6 shadow-sm border border-brand/20">
                     <i class="fa-solid fa-certificate text-yellow-500 mr-2"></i>
                     <span class="lang-es">Certificación INA</span><span class="lang-en hidden">INA Certified Professional</span>
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                    <span class="lang-es">Limpieza que se nota, <br><span class="text-brand">hospitalidad que se siente</span></span>
-                    <span class="lang-en hidden">Spotless cleaning, <br><span class="text-brand">heartfelt hospitality</span></span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                    <span class="lang-es">Limpieza que se nota, <br class="hidden sm:block"><span class="text-brand">hospitalidad que se siente</span></span>
+                    <span class="lang-en hidden">Spotless cleaning, <br class="hidden sm:block"><span class="text-brand">heartfelt hospitality</span></span>
                 </h1>
-                <p class="text-lg text-gray-600 mb-8">
+                <p class="text-base md:text-lg text-gray-600 mb-6 md:mb-8 px-2 md:px-0">
                     <span class="lang-es">Servicios profesionales para Airbnbs y residencias en La Fortuna y la GAM. Logre reseñas de 5 estrellas sin preocuparse por la logística.</span>
                     <span class="lang-en hidden">Professional services for Airbnbs and homes in La Fortuna and the GAM. Get 5-star reviews without worrying about logistics.</span>
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#calculadora" class="bg-brand hover:bg-brand-dark text-white px-8 py-3 rounded-full text-lg font-semibold transition shadow-xl text-center transform hover:scale-105">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full px-4 md:px-0">
+                    <a href="#calculadora" class="bg-brand hover:bg-brand-dark text-white px-8 py-3.5 rounded-full text-base md:text-lg font-semibold transition shadow-xl text-center transform hover:scale-105 w-full md:w-auto">
                         <i class="fa-solid fa-calculator mr-2"></i>
                         <span class="lang-es">Cotizador Interactivo</span><span class="lang-en hidden">Interactive Quote</span>
                     </a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center w-full scroll-hide" style="transition-delay: 200ms;">
-                <div class="w-full max-w-lg h-[24rem] bg-white rounded-3xl shadow-2xl flex items-center justify-center border-4 border-white overflow-hidden relative group">
+                <div class="w-full max-w-lg h-64 sm:h-80 md:h-[24rem] bg-white rounded-3xl shadow-2xl flex items-center justify-center border-4 border-white overflow-hidden relative group">
                     <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Clean room" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                 </div>
             </div>
@@ -106,35 +136,36 @@
     </section>
 
     <!-- Beneficios -->
-    <section id="beneficios" class="py-20 px-4 bg-white">
+    <section id="beneficios" class="py-16 md:py-20 px-4 bg-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 scroll-hide">
+            <h2 class="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 scroll-hide">
                 <span class="lang-es">¿Por qué elegir a Sofía?</span>
                 <span class="lang-en hidden">Why choose Sofía?</span>
             </h2>
-            <p class="text-center text-gray-500 mb-16 scroll-hide">
+            <p class="text-center text-sm md:text-base text-gray-500 mb-10 md:mb-16 scroll-hide">
                 <span class="lang-es">Pase el ratón (o toque) las tarjetas para descubrir los beneficios</span>
                 <span class="lang-en hidden">Hover or tap the cards to discover the benefits</span>
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Tarjetas se ajustan 100% ancho en móvil -->
+                <div class="flip-card h-56 md:h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
-                            <div class="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mb-4">
-                                <i class="fa-solid fa-graduation-cap text-3xl text-brand"></i>
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-brand-light rounded-full flex items-center justify-center mb-3 md:mb-4">
+                                <i class="fa-solid fa-graduation-cap text-2xl md:text-3xl text-brand"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">
+                            <h3 class="text-lg md:text-xl font-bold text-gray-800">
                                 <span class="lang-es">Capacitación Formal</span><span class="lang-en hidden">Formal Training</span>
                             </h3>
-                            <p class="text-brand font-medium text-sm mt-2">
+                            <p class="text-brand font-medium text-xs md:text-sm mt-2">
                                 <span class="lang-es">Girar para ver <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                                 <span class="lang-en hidden">Flip to see <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                             </p>
                         </div>
                         <div class="absolute w-full h-full backface-hidden bg-brand text-white rotate-y-180 flex flex-col items-center justify-center p-6 rounded-2xl text-center">
-                            <i class="fa-solid fa-star text-yellow-300 text-3xl mb-3"></i>
-                            <p class="font-medium leading-relaxed">
+                            <i class="fa-solid fa-star text-yellow-300 text-2xl md:text-3xl mb-2 md:mb-3"></i>
+                            <p class="text-sm md:text-base font-medium leading-relaxed">
                                 <span class="lang-es">Certificada por el INA en Servicio al Cliente. Trato cálido y altamente profesional si coincide con sus huéspedes.</span>
                                 <span class="lang-en hidden">INA Certified in Customer Service. Warm and highly professional treatment if interacting with your guests.</span>
                             </p>
@@ -142,49 +173,49 @@
                     </div>
                 </div>
 
-                <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 150ms;">
+                <div class="flip-card h-56 md:h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 150ms;">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
-                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                                <i class="fa-solid fa-clock text-3xl text-green-600"></i>
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 md:mb-4">
+                                <i class="fa-solid fa-clock text-2xl md:text-3xl text-green-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">
+                            <h3 class="text-lg md:text-xl font-bold text-gray-800">
                                 <span class="lang-es">Puntualidad Crítica</span><span class="lang-en hidden">Critical Punctuality</span>
                             </h3>
-                            <p class="text-green-600 font-medium text-sm mt-2">
+                            <p class="text-green-600 font-medium text-xs md:text-sm mt-2">
                                 <span class="lang-es">Girar para ver <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                                 <span class="lang-en hidden">Flip to see <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                             </p>
                         </div>
                         <div class="absolute w-full h-full backface-hidden bg-green-600 text-white rotate-y-180 flex flex-col items-center justify-center p-6 rounded-2xl text-center">
-                            <i class="fa-solid fa-stopwatch text-green-200 text-3xl mb-3"></i>
-                            <p class="font-medium leading-relaxed">
-                                <span class="lang-es">Dominio del horario "Turnover" (11 AM - 2 PM). Su propiedad siempre lista antes del check-in, incluso en temporada alta.</span>
+                            <i class="fa-solid fa-stopwatch text-green-200 text-2xl md:text-3xl mb-2 md:mb-3"></i>
+                            <p class="text-sm md:text-base font-medium leading-relaxed">
+                                <span class="lang-es">Dominio del "Turnover" (11 AM - 2 PM). Su propiedad siempre lista antes del check-in, incluso en temporada alta.</span>
                                 <span class="lang-en hidden">Mastery of the "Turnover" window (11 AM - 2 PM). Your property always ready before check-in, even in high season.</span>
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flip-card h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 300ms;">
+                <div class="flip-card h-56 md:h-64 perspective-1000 scroll-hide cursor-pointer" tabindex="0" style="transition-delay: 300ms;">
                     <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-2xl">
                         <div class="absolute w-full h-full backface-hidden bg-white border border-gray-100 flex flex-col items-center justify-center rounded-2xl p-6">
-                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                                <i class="fa-solid fa-shield-heart text-3xl text-purple-600"></i>
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3 md:mb-4">
+                                <i class="fa-solid fa-shield-heart text-2xl md:text-3xl text-purple-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">
+                            <h3 class="text-lg md:text-xl font-bold text-gray-800">
                                 <span class="lang-es">Amplia Cobertura</span><span class="lang-en hidden">Wide Coverage</span>
                             </h3>
-                            <p class="text-purple-600 font-medium text-sm mt-2">
+                            <p class="text-purple-600 font-medium text-xs md:text-sm mt-2">
                                 <span class="lang-es">Girar para ver <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                                 <span class="lang-en hidden">Flip to see <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
                             </p>
                         </div>
                         <div class="absolute w-full h-full backface-hidden bg-purple-600 text-white rotate-y-180 flex flex-col items-center justify-center p-6 rounded-2xl text-center">
-                            <i class="fa-solid fa-map-location-dot text-purple-200 text-3xl mb-3"></i>
-                            <p class="font-medium leading-relaxed">
-                                <span class="lang-es">Operamos en La Fortuna de San Carlos y la Gran Área Metropolitana (GAM). Referencias comprobables a solicitud.</span>
-                                <span class="lang-en hidden">Operating in La Fortuna and the Greater Metropolitan Area (GAM). Verifiable references available upon request.</span>
+                            <i class="fa-solid fa-map-location-dot text-purple-200 text-2xl md:text-3xl mb-2 md:mb-3"></i>
+                            <p class="text-sm md:text-base font-medium leading-relaxed">
+                                <span class="lang-es">Operamos en La Fortuna de San Carlos y la GAM. Referencias comprobables a solicitud de los propietarios.</span>
+                                <span class="lang-en hidden">Operating in La Fortuna and the GAM. Verifiable references available upon request.</span>
                             </p>
                         </div>
                     </div>
@@ -194,51 +225,51 @@
     </section>
 
     <!-- Servicios -->
-    <section id="servicios" class="py-20 px-4 bg-gray-50 border-t border-gray-200">
+    <section id="servicios" class="py-16 md:py-20 px-4 bg-gray-50 border-t border-gray-200">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 scroll-hide">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 md:mb-16 scroll-hide">
                 <span class="lang-es">Especialidades del Servicio</span>
                 <span class="lang-en hidden">Service Specialties</span>
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide">
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-4 md:mb-6">
                         <i class="fa-solid fa-bed"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">
                         <span class="lang-es">Limpieza Turnover</span>
                         <span class="lang-en hidden">Turnover Cleaning</span>
                     </h3>
-                    <p class="text-gray-600 text-sm">
+                    <p class="text-gray-600 text-sm md:text-base">
                         <span class="lang-es">Aseo profundo rápido, cambio de sábanas, reabastecimiento de insumos y preparación visual de la propiedad.</span>
                         <span class="lang-en hidden">Fast deep cleaning, linen change, restocking of supplies, and visual preparation of the property.</span>
                     </p>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide">
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-4 md:mb-6">
                         <i class="fa-solid fa-house-chimney"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">
                         <span class="lang-es">Mantenimiento Residencial</span>
                         <span class="lang-en hidden">Residential Maintenance</span>
                     </h3>
-                    <p class="text-gray-600 text-sm">
+                    <p class="text-gray-600 text-sm md:text-base">
                         <span class="lang-es">Limpieza preventiva y profunda para evitar acumulación de polvo en cabañas y casas de temporada.</span>
                         <span class="lang-en hidden">Preventive and deep cleaning to avoid dust accumulation in cabins and vacation homes.</span>
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide" style="transition-delay: 300ms;">
-                    <div class="w-14 h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-6">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow hover:shadow-lg transition border-t-4 border-brand scroll-hide">
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-brand-light text-brand rounded-xl flex items-center justify-center text-xl mb-4 md:mb-6">
                         <i class="fa-solid fa-utensils"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">
                         <span class="lang-es">Cocina Típica Opcional</span>
                         <span class="lang-en hidden">Optional Local Cooking</span>
                     </h3>
-                    <p class="text-gray-600 text-sm">
+                    <p class="text-gray-600 text-sm md:text-base">
                         <span class="lang-es">Ofrezca un "plus". Preparación de desayunos y casados típicos con auténtico sabor casero para sus turistas.</span>
                         <span class="lang-en hidden">Offer a "plus". Preparation of traditional breakfasts and meals with authentic homemade flavor for your tourists.</span>
                     </p>
@@ -248,89 +279,59 @@
     </section>
 
     <!-- Insumos y Herramientas -->
-    <section id="insumos" class="py-20 px-4 bg-white border-t border-gray-100">
+    <section id="insumos" class="py-16 md:py-20 px-4 bg-white border-t border-gray-100">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12 scroll-hide">
-                <h2 class="text-3xl font-bold mb-4">
+            <div class="text-center mb-10 md:mb-12 scroll-hide">
+                <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
                     <span class="lang-es">Equipamiento e Insumos</span>
                     <span class="lang-en hidden">Equipment & Supplies</span>
                 </h2>
-                <p class="text-gray-600">
+                <p class="text-gray-600 text-sm md:text-base">
                     <span class="lang-es">Para garantizar eficiencia y transparencia, dividimos los recursos de la siguiente manera:</span>
                     <span class="lang-en hidden">To guarantee efficiency and transparency, we divide resources as follows:</span>
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-brand-light/20 border border-brand-light rounded-2xl p-8 shadow-sm scroll-hide">
-                    <h3 class="text-xl font-bold text-brand-dark mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center mr-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-brand-light/20 border border-brand-light rounded-2xl p-6 md:p-8 shadow-sm scroll-hide">
+                    <h3 class="text-lg md:text-xl font-bold text-brand-dark mb-5 md:mb-6 flex items-center">
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-brand text-white rounded-full flex items-center justify-center mr-3 text-sm md:text-base">
                             <i class="fa-solid fa-pump-soap"></i>
                         </div>
                         <span class="lang-es">Nosotros Llevamos:</span>
                         <span class="lang-en hidden">We Bring:</span>
                     </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Cloro</span><span class="lang-en hidden">Bleach</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Desinfectante de superficies</span><span class="lang-en hidden">Surface Disinfectant</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Vinagre y Bicarbonato</span><span class="lang-en hidden">Vinegar and Baking Soda</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Jabón en polvo</span><span class="lang-en hidden">Powder Detergent</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Limpiador de vidrios</span><span class="lang-en hidden">Glass Cleaner</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Paño para limpieza de pisos (Mecha/Mop)</span><span class="lang-en hidden">Floor Cleaning Cloth / Mop Pad</span></span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa-solid fa-check text-brand mt-1 mr-3"></i>
-                            <span class="text-gray-700"><span class="lang-es">Esponja lavaplatos</span><span class="lang-en hidden">Dishwashing Sponge</span></span>
-                        </li>
+                    <ul class="space-y-3 md:space-y-4 text-sm md:text-base">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Cloro</span><span class="lang-en hidden">Bleach</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Desinfectante de superficies</span><span class="lang-en hidden">Surface Disinfectant</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Vinagre y Bicarbonato</span><span class="lang-en hidden">Vinegar and Baking Soda</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Jabón en polvo</span><span class="lang-en hidden">Powder Detergent</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Limpiador de vidrios</span><span class="lang-en hidden">Glass Cleaner</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Paño de pisos (Mecha/Mop)</span><span class="lang-en hidden">Floor Cloth / Mop Pad</span></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand mt-1 mr-3"></i><span class="text-gray-700"><span class="lang-es">Esponja lavaplatos</span><span class="lang-en hidden">Dishwashing Sponge</span></span></li>
                     </ul>
                 </div>
 
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm scroll-hide" style="transition-delay: 150ms;">
-                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center mr-3">
+                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm scroll-hide">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-5 md:mb-6 flex items-center">
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 text-white rounded-full flex items-center justify-center mr-3 text-sm md:text-base">
                             <i class="fa-solid fa-house-user"></i>
                         </div>
                         <span class="lang-es">El Alojamiento Provee:</span>
                         <span class="lang-en hidden">The Property Provides:</span>
                     </h3>
-                    <ul class="space-y-4">
+                    <ul class="space-y-4 text-sm md:text-base">
                         <li class="flex items-start">
                             <i class="fa-solid fa-circle-exclamation text-gray-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">
-                                <span class="lang-es"><strong>Bolsas para basura</strong> (adecuadas al tamaño de sus basureros)</span>
-                                <span class="lang-en hidden"><strong>Trash bags</strong> (fitting your bin sizes)</span>
-                            </span>
+                            <span class="text-gray-700"><span class="lang-es"><strong>Bolsas para basura</strong> (adecuadas a sus basureros)</span><span class="lang-en hidden"><strong>Trash bags</strong> (fitting your bin sizes)</span></span>
                         </li>
                         <li class="flex items-start">
                             <i class="fa-solid fa-circle-exclamation text-gray-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">
-                                <span class="lang-es"><strong>Escoba y palo de piso</strong> (palo para el paño)</span>
-                                <span class="lang-en hidden"><strong>Broom and mop stick</strong></span>
-                            </span>
+                            <span class="text-gray-700"><span class="lang-es"><strong>Escoba y palo de piso</strong></span><span class="lang-en hidden"><strong>Broom and mop stick</strong></span></span>
                         </li>
                         <li class="flex items-start">
                             <i class="fa-solid fa-circle-exclamation text-gray-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">
-                                <span class="lang-es"><strong>Paños de microfibra</strong> para sacudir y secar</span>
-                                <span class="lang-en hidden"><strong>Microfiber cloths</strong> for dusting and drying</span>
-                            </span>
+                            <span class="text-gray-700"><span class="lang-es"><strong>Paños de microfibra</strong> para sacudir y secar</span><span class="lang-en hidden"><strong>Microfiber cloths</strong> for dusting</span></span>
                         </li>
                     </ul>
                 </div>
@@ -339,80 +340,81 @@
     </section>
 
     <!-- Calculadora Dinámica Interactiva -->
-    <section id="calculadora" class="py-20 px-4 bg-brand-dark text-white">
+    <section id="calculadora" class="py-16 md:py-20 px-4 bg-brand-dark text-white">
         <div class="max-w-4xl mx-auto scroll-hide">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-4">
+            <div class="text-center mb-8 md:mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
                     <span class="lang-es">Cotizador de Servicios</span>
                     <span class="lang-en hidden">Service Quoting Tool</span>
                 </h2>
-                <p class="text-brand-light">
+                <p class="text-brand-light text-sm md:text-base">
                     <span class="lang-es">Simule su presupuesto según la necesidad y fechas de su propiedad.</span>
                     <span class="lang-en hidden">Simulate your budget based on your property's needs and dates.</span>
                 </p>
             </div>
 
-            <div class="bg-white text-gray-800 border border-gray-200 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-                <div id="ribbon" class="absolute top-6 -right-12 bg-yellow-400 text-yellow-900 font-bold px-12 py-1 transform rotate-45 hidden text-sm shadow-md">
+            <div class="bg-white text-gray-800 border border-gray-200 rounded-3xl p-5 sm:p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                <div id="ribbon" class="absolute top-6 -right-12 bg-yellow-400 text-yellow-900 font-bold px-12 py-1 transform rotate-45 hidden text-xs md:text-sm shadow-md">
                     <span class="lang-es">MEJOR VALOR</span><span class="lang-en hidden">BEST VALUE</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
                     <!-- Controles Interactivos -->
                     <div>
                         <!-- Selección de Horas -->
                         <div class="mb-8">
-                            <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
+                            <label class="block text-sm md:text-base font-bold text-gray-500 uppercase mb-3 md:mb-4">
                                 <span class="lang-es">1. Seleccione las horas:</span>
                                 <span class="lang-en hidden">1. Select hours:</span>
                             </label>
                             
-                            <div class="flex items-center justify-between bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-6">
-                                <button id="btn-minus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
-                                    <i class="fa-solid fa-minus"></i>
+                            <div class="flex items-center justify-between bg-gray-50 p-3 md:p-4 rounded-2xl border border-gray-200 mb-4 md:mb-6">
+                                <!-- Botones Touch-friendly (más grandes) -->
+                                <button id="btn-minus" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none touch-manipulation">
+                                    <i class="fa-solid fa-minus text-xl md:text-base"></i>
                                 </button>
-                                <div class="text-2xl font-bold text-brand-dark" id="hours-display-text">3 hrs</div>
-                                <button id="btn-plus" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none">
-                                    <i class="fa-solid fa-plus"></i>
+                                <div class="text-2xl md:text-3xl font-bold text-brand-dark" id="hours-display-text">3 hrs</div>
+                                <button id="btn-plus" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-white shadow flex items-center justify-center text-brand hover:bg-brand hover:text-white transition focus:outline-none touch-manipulation">
+                                    <i class="fa-solid fa-plus text-xl md:text-base"></i>
                                 </button>
                             </div>
                             
-                            <input type="range" id="hour-slider" min="1" max="8" value="3" class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand mb-2">
-                            <div class="flex justify-between text-xs text-gray-400 font-medium">
-                                <span>1h</span><span>2h</span><span>3h</span><span>4h</span><span>5h</span><span>6h</span><span></span><span>8h (Día/Day)</span>
+                            <input type="range" id="hour-slider" min="1" max="8" value="3" class="w-full h-4 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand mb-2 touch-manipulation">
+                            <div class="flex justify-between text-xs text-gray-400 font-medium px-1">
+                                <span>1h</span><span>3h</span><span>5h</span><span>6h</span><span class="text-brand-dark font-bold">Día</span>
                             </div>
                         </div>
 
                         <!-- Selección de Fechas -->
                         <div>
-                            <label class="block text-sm font-bold text-gray-500 uppercase mb-4">
-                                <span class="lang-es">2. Añada sus fechas de limpieza:</span>
-                                <span class="lang-en hidden">2. Add your cleaning dates:</span>
+                            <label class="block text-sm md:text-base font-bold text-gray-500 uppercase mb-3 md:mb-4">
+                                <span class="lang-es">2. Añada sus fechas:</span>
+                                <span class="lang-en hidden">2. Add your dates:</span>
                             </label>
-                            <div class="flex gap-2 mb-4">
-                                <input type="date" id="date-picker" class="flex-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand font-medium">
-                                <button id="btn-add-date" class="bg-brand text-white px-5 py-3 rounded-xl font-bold hover:bg-brand-dark transition shadow-md flex items-center justify-center">
-                                    <i class="fa-solid fa-plus"></i>
+                            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                                <input type="date" id="date-picker" class="flex-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-xl px-4 py-3 md:py-3 focus:outline-none focus:border-brand font-medium w-full text-base">
+                                <button id="btn-add-date" class="bg-brand text-white px-5 py-3 md:py-3 rounded-xl font-bold hover:bg-brand-dark transition shadow-md flex items-center justify-center touch-manipulation w-full sm:w-auto">
+                                    <i class="fa-solid fa-plus mr-2 sm:mr-0"></i> <span class="sm:hidden ml-1"> <span class="lang-es">Agregar</span><span class="lang-en hidden">Add</span></span>
                                 </button>
                             </div>
                             <!-- Contenedor de etiquetas de fechas -->
-                            <div id="dates-list" class="flex flex-wrap gap-2">
+                            <div id="dates-list" class="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
                                 <!-- Las fechas se inyectan aquí -->
                             </div>
                         </div>
                     </div>
 
                     <!-- Panel de Total -->
-                    <div class="bg-brand-light/30 rounded-2xl p-6 text-center h-full flex flex-col justify-center border border-brand-light">
-                        <p class="text-sm text-gray-500 uppercase tracking-wide font-bold mb-2">
+                    <div class="bg-brand-light/30 rounded-2xl p-5 md:p-6 text-center h-full flex flex-col justify-center border border-brand-light mt-4 lg:mt-0">
+                        <p class="text-xs md:text-sm text-gray-500 uppercase tracking-wide font-bold mb-2">
                             <span class="lang-es">Total Estimado</span><span class="lang-en hidden">Estimated Total</span>
                         </p>
-                        <div class="text-5xl md:text-6xl font-extrabold text-brand-dark mb-2 transition-all duration-300" id="price-display">₡9,000</div>
-                        <p class="text-gray-500 font-medium text-sm mb-4" id="multiplier-display"></p>
+                        <div class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-dark mb-1 transition-all duration-300" id="price-display">₡9,000</div>
+                        <p class="text-gray-500 font-medium text-xs md:text-sm mb-3 md:mb-4 h-5" id="multiplier-display"></p>
                         
-                        <p class="text-brand font-bold h-6 text-sm mb-6" id="discount-badge"></p>
+                        <p class="text-brand font-bold h-6 text-xs md:text-sm mb-4 md:mb-6" id="discount-badge"></p>
 
-                        <a href="#" id="calc-whatsapp" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-xl font-bold text-lg transition-transform hover:scale-[1.02] shadow-lg shadow-green-500/30">
+                        <a href="#" id="calc-whatsapp" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-3.5 md:py-4 rounded-xl font-bold text-base md:text-lg transition-transform hover:scale-[1.02] shadow-lg shadow-green-500/30 touch-manipulation">
                             <i class="fa-brands fa-whatsapp mr-2 text-xl"></i>
                             <span class="lang-es">Agendar Limpieza</span><span class="lang-en hidden">Book Cleaning</span>
                         </a>
@@ -423,45 +425,45 @@
     </section>
 
     <!-- FAQ Acordeón -->
-    <section id="faq" class="py-20 px-4 bg-white">
+    <section id="faq" class="py-16 md:py-20 px-4 bg-white">
         <div class="max-w-3xl mx-auto scroll-hide">
-            <h2 class="text-3xl font-bold text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-10">
                 <span class="lang-es">Preguntas Frecuentes</span>
                 <span class="lang-en hidden">Frequently Asked Questions</span>
             </h2>
             
-            <div class="space-y-4">
+            <div class="space-y-3 md:space-y-4">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                        <span class="lang-es">¿Quién provee los artículos de limpieza?</span>
-                        <span class="lang-en hidden">Who provides the cleaning supplies?</span>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300"></i>
+                    <button class="faq-toggle w-full px-5 py-4 md:px-6 md:py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition touch-manipulation">
+                        <span class="lang-es pr-4 text-sm md:text-base">¿Quién provee los artículos de limpieza?</span>
+                        <span class="lang-en hidden pr-4 text-sm md:text-base">Who provides the cleaning supplies?</span>
+                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300 flex-shrink-0"></i>
                     </button>
-                    <div class="faq-content px-6 text-gray-600 text-sm bg-gray-50 border-t border-gray-100">
+                    <div class="faq-content px-5 md:px-6 text-gray-600 text-xs md:text-sm bg-gray-50 border-t border-gray-100">
                         <span class="lang-es">Yo llevo mis propios líquidos y suministros básicos (cloro, desinfectante, vinagre, jabón). Solo pido que la propiedad cuente con las bolsas de basura, escoba, palo de piso y los paños para sacudir.</span>
                         <span class="lang-en hidden">I bring my own liquids and basic supplies (bleach, disinfectant, vinegar, soap). I only ask the property to provide trash bags, a broom, a mop stick, and dusting cloths.</span>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                        <span class="lang-es">¿Se trabajan fines de semana o feriados?</span>
-                        <span class="lang-en hidden">Do you work on weekends or holidays?</span>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300"></i>
+                    <button class="faq-toggle w-full px-5 py-4 md:px-6 md:py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition touch-manipulation">
+                        <span class="lang-es pr-4 text-sm md:text-base">¿Se trabajan fines de semana o feriados?</span>
+                        <span class="lang-en hidden pr-4 text-sm md:text-base">Do you work on weekends or holidays?</span>
+                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300 flex-shrink-0"></i>
                     </button>
-                    <div class="faq-content px-6 text-gray-600 text-sm bg-gray-50 border-t border-gray-100">
+                    <div class="faq-content px-5 md:px-6 text-gray-600 text-xs md:text-sm bg-gray-50 border-t border-gray-100">
                         <span class="lang-es">Total disponibilidad (sujeto a agenda previa). Entendemos que el movimiento en La Fortuna y la GAM nunca se detiene.</span>
                         <span class="lang-en hidden">Full availability (subject to prior scheduling). We understand movement in La Fortuna and the GAM never stops.</span>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                        <span class="lang-es">¿Qué zonas abarcan los servicios?</span>
-                        <span class="lang-en hidden">What areas do the services cover?</span>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300"></i>
+                    <button class="faq-toggle w-full px-5 py-4 md:px-6 md:py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition touch-manipulation">
+                        <span class="lang-es pr-4 text-sm md:text-base">¿Qué zonas abarcan los servicios?</span>
+                        <span class="lang-en hidden pr-4 text-sm md:text-base">What areas do the services cover?</span>
+                        <i class="fa-solid fa-chevron-down text-brand transition-transform duration-300 flex-shrink-0"></i>
                     </button>
-                    <div class="faq-content px-6 text-gray-600 text-sm bg-gray-50 border-t border-gray-100">
+                    <div class="faq-content px-5 md:px-6 text-gray-600 text-xs md:text-sm bg-gray-50 border-t border-gray-100">
                         <span class="lang-es">Cubrimos estratégicamente La Fortuna de San Carlos y la Gran Área Metropolitana (GAM).</span>
                         <span class="lang-en hidden">We strategically cover La Fortuna and the Greater Metropolitan Area (GAM).</span>
                     </div>
@@ -471,15 +473,15 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 text-center">
+    <footer class="bg-gray-900 text-white py-10 md:py-12 text-center">
         <div class="max-w-4xl mx-auto px-4">
-            <div class="w-16 h-1 bg-brand mx-auto mb-6 rounded"></div>
-            <h4 class="text-2xl font-bold mb-4">
+            <div class="w-12 md:w-16 h-1 bg-brand mx-auto mb-5 md:mb-6 rounded"></div>
+            <h4 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">
                 <span class="lang-es">La tranquilidad de un espacio impecable</span>
                 <span class="lang-en hidden">The peace of mind of a spotless space</span>
             </h4>
-            <p class="text-sm text-gray-400 mb-2">© 2026 Sofía Limpieza y Hospitalidad. La Fortuna y la GAM, Costa Rica.</p>
-            <p class="text-xs text-gray-500">Diseñado con <i class="fa-solid fa-heart text-red-500"></i> para un mejor servicio.</p>
+            <p class="text-xs md:text-sm text-gray-400 mb-2">© 2026 Sofía Limpieza y Hospitalidad. La Fortuna y la GAM, Costa Rica.</p>
+            <p class="text-[10px] md:text-xs text-gray-500">Diseñado con <i class="fa-solid fa-heart text-red-500 mx-1"></i> para un mejor servicio.</p>
         </div>
     </footer>
 
@@ -493,6 +495,9 @@
         const btnLang = document.getElementById('langToggle');
         const lblEs = document.getElementById('label-es');
         const lblEn = document.getElementById('label-en');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
         
         const slider = document.getElementById('hour-slider');
         const btnMinus = document.getElementById('btn-minus');
@@ -508,6 +513,29 @@
         const badge = document.getElementById('discount-badge');
         const btnWa = document.getElementById('calc-whatsapp');
         const ribbon = document.getElementById('ribbon');
+
+        // MENÚ MÓVIL (HAMBURGUESA)
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('menu-open');
+            const icon = hamburgerBtn.querySelector('i');
+            if (mobileMenu.classList.contains('menu-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('menu-open');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
 
         // LÓGICA DE IDIOMA
         btnLang.addEventListener('click', () => {
@@ -528,7 +556,7 @@
             esElements.forEach(el => { isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'); });
             enElements.forEach(el => { isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'); });
             
-            renderDates(); // Re-renderizar fechas para cambiar el formato de mes
+            renderDates(); 
             updateCalculator(); 
         });
 
@@ -537,26 +565,25 @@
             const dateVal = datePicker.value;
             if (dateVal && !selectedDates.includes(dateVal)) {
                 selectedDates.push(dateVal);
-                selectedDates.sort(); // Ordenar cronológicamente
+                selectedDates.sort(); 
                 renderDates();
                 updateCalculator();
             }
-            datePicker.value = ''; // Limpiar input
+            datePicker.value = ''; 
         });
 
         function renderDates() {
             datesList.innerHTML = '';
             selectedDates.forEach(date => {
                 const chip = document.createElement('div');
-                chip.className = 'bg-brand-light text-brand-dark px-3 py-1.5 rounded-lg text-sm font-bold flex items-center shadow-sm border border-brand/20';
+                chip.className = 'bg-brand-light text-brand-dark px-3 py-1.5 rounded-lg text-xs md:text-sm font-bold flex items-center shadow-sm border border-brand/20';
                 
-                // Formatear fecha (Ej: 15 Oct)
                 const d = new Date(date + 'T12:00:00'); 
                 const formatted = d.toLocaleDateString(isEnglish ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
 
                 chip.innerHTML = `
                     <i class="fa-regular fa-calendar mr-2 opacity-70"></i> ${formatted}
-                    <button class="ml-3 text-brand hover:text-red-500 focus:outline-none transition" onclick="removeDate('${date}')">
+                    <button class="ml-2 md:ml-3 text-brand hover:text-red-500 focus:outline-none transition p-1" onclick="removeDate('${date}')">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 `;
@@ -573,7 +600,6 @@
         // LÓGICA DEL CALCULADOR
         function updateCalculator() {
             let val = parseInt(slider.value);
-            // Salto de 6 a 8
             if (val === 7) {
                 if (parseInt(slider.dataset.lastValue || 3) > val) val = 6;
                 else val = 8;
@@ -583,9 +609,8 @@
             
             let basePrice = 0;
             let msg = "";
-            let numDays = Math.max(1, selectedDates.length); // Mínimo 1 para mostrar el precio base
+            let numDays = Math.max(1, selectedDates.length);
             
-            // Textos de Horas
             if (val <= 6) {
                 basePrice = val * 3000;
                 hoursDisplayText.innerHTML = `${val} ${isEnglish ? 'hrs' : 'hrs'}`;
@@ -600,20 +625,16 @@
                 ribbon.classList.remove('hidden');
             }
 
-            // Calculo Final
             let totalPrice = basePrice * numDays;
             
-            // Texto Multiplicador debajo del precio
             if (selectedDates.length > 1) {
                 multiplierDisplay.innerHTML = isEnglish ? `(For ${selectedDates.length} selected days)` : `(Por ${selectedDates.length} días seleccionados)`;
             } else {
                 multiplierDisplay.innerHTML = "";
             }
 
-            // String de fechas para el mensaje
             let dateString = selectedDates.length > 0 ? selectedDates.join(', ') : (isEnglish ? 'Not specified yet' : 'Por definir');
 
-            // Armar mensaje WhatsApp
             if (val <= 6) {
                 msg = isEnglish ? 
                     `Hello Sofía! I want to book a cleaning service for ${val} hours.\n🗓 Dates: ${dateString}\n💰 Estimated total: ₡${totalPrice.toLocaleString()}.` : 
@@ -624,7 +645,6 @@
                     `¡Hola doña Sofía! Me interesa agendar el servicio de Día Completo (8 hrs).\n🗓 Fechas: ${dateString}\n💰 Total estimado: ₡${totalPrice.toLocaleString()}.`;
             }
 
-            // Animación
             priceDisplay.style.opacity = 0;
             setTimeout(() => {
                 priceDisplay.innerHTML = `₡${totalPrice.toLocaleString()}`;
@@ -638,7 +658,6 @@
         btnMinus.addEventListener('click', () => { if(slider.value > 1) { slider.value = parseInt(slider.value) - 1; updateCalculator(); } });
         btnPlus.addEventListener('click', () => { if(slider.value < 8) { slider.value = parseInt(slider.value) + 1; updateCalculator(); } });
         
-        // Inicializar
         updateCalculator(); 
 
         // LÓGICA FAQ
